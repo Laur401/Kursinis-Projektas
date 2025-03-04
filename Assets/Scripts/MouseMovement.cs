@@ -5,26 +5,22 @@ using UnityEngine;
 
 public class MouseMovement : MonoBehaviour
 {
-    // Start is called before the first frame update
     [SerializeField] private float shotPower=1;
     [SerializeField] private LineRenderer lineRenderer;
     private Vector3 screenPosition;
     private Vector3 worldPosition;
     private Rigidbody rb;
+    private LevelScoringManager lsm;
     
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+        lsm = FindAnyObjectByType<LevelScoringManager>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        //Mouse.current.position.readValue()
-        /*screenPosition = Input.mousePosition;
-        screenPosition.z = Camera.main.nearClipPlane + 1;
-        worldPosition = Camera.main.ScreenToWorldPoint(screenPosition);
-        transform.position = worldPosition;*/
         Vector3? worldPoint = CastMouseClickRay();
         if (!worldPoint.HasValue) return;
         DrawLine(worldPoint.Value);
@@ -43,7 +39,7 @@ public class MouseMovement : MonoBehaviour
         lineRenderer.enabled = true;
     }
 
-    private Vector3? CastMouseClickRay()
+    private static Vector3? CastMouseClickRay()
     {
         Vector3 screenMousePosFar = new Vector3(
             Input.mousePosition.x,
@@ -72,6 +68,9 @@ public class MouseMovement : MonoBehaviour
         float strength = Vector3.Distance(transform.position, horizontalWorldPoint);
         
         rb.AddForce(direction * (strength * shotPower));
+        lsm.AddStroke();
     }
+    
+    //TODO: Remove shooting while moving, add function that definitively stops the ball when movement is small enough.
     
 }
