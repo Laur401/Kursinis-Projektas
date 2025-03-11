@@ -9,8 +9,8 @@ public class PlayerController : MonoBehaviour
 	public float speed; // savas kintamasis, parametras - is mazosios
 	private Rigidbody rb; // savas metodas - is didziosios (pvz komponentas RigidBody is didz)
 
-    public TextMeshProUGUI countText;
-    private int count; //skaiciuoja surinktus obj.
+    //public TextMeshProUGUI countText;
+    //private int count; //skaiciuoja surinktus obj.
     public TextMeshProUGUI winText;
 
     public AudioSource as1; // public tam, kad galetume susiet su AudioSource obj.
@@ -21,9 +21,9 @@ public class PlayerController : MonoBehaviour
         rb = GetComponent<Rigidbody>(); // gaunamas bet koks komponentas
                                         // gale () - GetComponent yra metodas
                                         // kiekvieno sak. gale ;
-        SetCountText(); // tai nestandartinis, o sukurtas metodas, isvedantis info i ekrana
-        count = 0;
-        winText.text = ""; // pradzioje uzraso buti neturi
+        //SetCountText(); // tai nestandartinis, o sukurtas metodas, isvedantis info i ekrana
+        //count = 0;
+        //winText.text = ""; // pradzioje uzraso buti neturi
     }
 
     // Update is called once per frame (for Update() at least)
@@ -37,7 +37,7 @@ public class PlayerController : MonoBehaviour
 		rb.AddForce(movement * speed);
     }
 
-    void OnTriggerEnter(Collider other)
+    /*void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("Pick Up")) // priskirti zyme norimiems rinkti obj., kamuoliui paemus pickup'a pridedamas vienetas
         {
@@ -51,10 +51,10 @@ public class PlayerController : MonoBehaviour
                 as1.Stop();
             }
         }
-    }
+    }*/
 
-    void SetCountText()
+    /*void SetCountText()
     {
         countText.text = "Count: " + count.ToString(); // count sk. pakeiciamas i tekstine eilute
-    }
+    }*/
 }
