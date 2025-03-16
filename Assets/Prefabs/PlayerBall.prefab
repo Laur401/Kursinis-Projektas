@@ -149,6 +149,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shotPower: 100
   lineRenderer: {fileID: 2079519890468067627}
+  stopVelocity: 0.1
 --- !u!1 &1150325873930747452
 GameObject:
   m_ObjectHideFlags: 0
