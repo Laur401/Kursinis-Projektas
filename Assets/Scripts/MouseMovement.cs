@@ -2,34 +2,43 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.ProBuilder.MeshOperations;
 
 public class MouseMovement : MonoBehaviour
 {
-    // Start is called before the first frame update
     [SerializeField] private float shotPower=1;
     [SerializeField] private LineRenderer lineRenderer;
+    [SerializeField] private float stopVelocity;
     private Vector3 screenPosition;
     private Vector3 worldPosition;
     private Rigidbody rb;
+    private LevelScoringManager lsm;
+
+    private bool isMoving = false;
     
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+        lsm = FindAnyObjectByType<LevelScoringManager>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        //Mouse.current.position.readValue()
-        /*screenPosition = Input.mousePosition;
-        screenPosition.z = Camera.main.nearClipPlane + 1;
-        worldPosition = Camera.main.ScreenToWorldPoint(screenPosition);
-        transform.position = worldPosition;*/
-        Vector3? worldPoint = CastMouseClickRay();
-        if (!worldPoint.HasValue) return;
-        DrawLine(worldPoint.Value);
-        if (Input.GetMouseButtonDown(0))
-            Shoot(worldPoint.Value);
+        if (!isMoving)
+        {
+            Vector3? worldPoint = CastMouseClickRay();
+            if (!worldPoint.HasValue) return;
+            DrawLine(worldPoint.Value);
+        
+            if (Input.GetMouseButtonDown(0))
+                Shoot(worldPoint.Value);
+        }
+        
+    }
+    private void FixedUpdate()
+    {
+        CheckMovement();
     }
 
     private void DrawLine(Vector3 worldPoint)
@@ -43,7 +52,7 @@ public class MouseMovement : MonoBehaviour
         lineRenderer.enabled = true;
     }
 
-    private Vector3? CastMouseClickRay()
+    private static Vector3? CastMouseClickRay()
     {
         Vector3 screenMousePosFar = new Vector3(
             Input.mousePosition.x,
@@ -72,6 +81,24 @@ public class MouseMovement : MonoBehaviour
         float strength = Vector3.Distance(transform.position, horizontalWorldPoint);
         
         rb.AddForce(direction * (strength * shotPower));
+        
+        lsm.AddStroke();
     }
     
+    private void CheckMovement() //TODO: Figure out how to optimize this to not need to be called every frame.
+    {
+        if (rb.velocity.sqrMagnitude < stopVelocity)
+        {
+            rb.velocity = Vector3.zero;
+            rb.angularVelocity = Vector3.zero;
+            lineRenderer.enabled = true;
+            isMoving = false;
+        }
+        else
+        {
+            lineRenderer.enabled = false;
+            isMoving = true;
+        }
+    }
+
 }
