@@ -2,15 +2,19 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.ProBuilder.MeshOperations;
 
 public class MouseMovement : MonoBehaviour
 {
     [SerializeField] private float shotPower=1;
     [SerializeField] private LineRenderer lineRenderer;
+    [SerializeField] private float stopVelocity;
     private Vector3 screenPosition;
     private Vector3 worldPosition;
     private Rigidbody rb;
     private LevelScoringManager lsm;
+
+    private bool isMoving = false;
     
     void Start()
     {
@@ -21,11 +25,20 @@ public class MouseMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Vector3? worldPoint = CastMouseClickRay();
-        if (!worldPoint.HasValue) return;
-        DrawLine(worldPoint.Value);
-        if (Input.GetMouseButtonDown(0))
-            Shoot(worldPoint.Value);
+        if (!isMoving)
+        {
+            Vector3? worldPoint = CastMouseClickRay();
+            if (!worldPoint.HasValue) return;
+            DrawLine(worldPoint.Value);
+        
+            if (Input.GetMouseButtonDown(0))
+                Shoot(worldPoint.Value);
+        }
+        
+    }
+    private void FixedUpdate()
+    {
+        CheckMovement();
     }
 
     private void DrawLine(Vector3 worldPoint)
@@ -68,9 +81,24 @@ public class MouseMovement : MonoBehaviour
         float strength = Vector3.Distance(transform.position, horizontalWorldPoint);
         
         rb.AddForce(direction * (strength * shotPower));
+        
         lsm.AddStroke();
     }
     
-    //TODO: Remove shooting while moving, add function that definitively stops the ball when movement is small enough.
-    
+    private void CheckMovement() //TODO: Figure out how to optimize this to not need to be called every frame.
+    {
+        if (rb.velocity.sqrMagnitude < stopVelocity)
+        {
+            rb.velocity = Vector3.zero;
+            rb.angularVelocity = Vector3.zero;
+            lineRenderer.enabled = true;
+            isMoving = false;
+        }
+        else
+        {
+            lineRenderer.enabled = false;
+            isMoving = true;
+        }
+    }
+
 }
