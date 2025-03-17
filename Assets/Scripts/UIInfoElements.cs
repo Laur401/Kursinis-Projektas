@@ -11,7 +11,7 @@ public class UIInfoElements : MonoBehaviour
     private TextMeshProUGUI parText;
     private TextMeshProUGUI holeText;
 
-    private void Start()
+    private void Awake()
     {
         SceneManager.sceneLoaded += OnSceneLoaded;
         OnSceneLoaded(new Scene(), LoadSceneMode.Single);
