@@ -93,11 +93,11 @@ public class MouseMovement : MonoBehaviour
     private Vector3 ClampMousePoint(Vector3 worldPoint)
     {
         return Vector3.MoveTowards(gameObject.transform.position, worldPoint, 10f);
-        if (Vector3.Distance(gameObject.transform.position, worldPoint) > 30f)
+        /*if (Vector3.Distance(gameObject.transform.position, worldPoint) > 30f)
         {
             return Vector3.MoveTowards(gameObject.transform.position, worldPoint, 30f);
         }
-        else return worldPoint;
+        else return worldPoint;*/
     }
     
     private void CheckMovement() //TODO: Figure out how to optimize this to not need to be called every frame.
