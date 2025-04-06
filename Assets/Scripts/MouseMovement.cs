@@ -14,6 +14,7 @@ public class MouseMovement : MonoBehaviour
     private Vector3 worldPosition;
     private Rigidbody rb;
     private LevelScoringManager lsm;
+    [NonSerialized] public List<Vector3> shootLocations = new();
 
     private bool isMoving = false;
     
@@ -21,6 +22,7 @@ public class MouseMovement : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         lsm = FindAnyObjectByType<LevelScoringManager>();
+        shootLocations.Add(transform.position);
     }
 
     // Update is called once per frame
@@ -85,6 +87,7 @@ public class MouseMovement : MonoBehaviour
 
         direction = AdjustVelocityDirectionToSlope(direction);
         
+        shootLocations.Add(transform.position);
         rb.AddForce(direction * (strength * shotPower));
         
         lsm.AddStroke();
