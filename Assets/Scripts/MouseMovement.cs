@@ -1,8 +1,10 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using System.Timers;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.ProBuilder.MeshOperations;
 using UnityEngine.Rendering.PostProcessing;
 
@@ -27,6 +29,8 @@ public class MouseMovement : MonoBehaviour
         lsm = FindAnyObjectByType<LevelScoringManager>();
         timer = timerLength;
         shootLocations.Add(transform.position);
+        ExecuteEvents.Execute<IGameEventMessageTarget>(rb.gameObject, null,
+            (handler, data) => handler.OnBallLocationUpdate(shootLocations[^1]));
     }
 
     // Update is called once per frame
@@ -35,6 +39,7 @@ public class MouseMovement : MonoBehaviour
         if (!isMoving)
         {
             Vector3? worldPoint = CastMouseClickRay();
+            lineRenderer.enabled = false;
             if (!worldPoint.HasValue) return;
             worldPoint = ClampMousePoint(worldPoint.Value);
             
@@ -74,7 +79,13 @@ public class MouseMovement : MonoBehaviour
         Vector3 worldMousePosFar = Camera.main.ScreenToWorldPoint(screenMousePosFar);
         Vector3 worldMousePosNear = Camera.main.ScreenToWorldPoint(screenMousePosNear);
         RaycastHit hit;
-        if (Physics.Raycast(worldMousePosNear, worldMousePosFar - worldMousePosNear, out hit, float.PositiveInfinity))
+
+        int UILayer = LayerMask.NameToLayer("UI");
+        List<RaycastResult> raycastResults = new List<RaycastResult>();
+        EventSystem.current.RaycastAll(new PointerEventData(EventSystem.current){position = Input.mousePosition}, raycastResults);
+        
+        if (Physics.Raycast(worldMousePosNear, worldMousePosFar - worldMousePosNear, out hit, 
+                float.PositiveInfinity) && raycastResults.All(x => x.gameObject.layer != UILayer))
         {
             return hit.point;
         }
@@ -93,6 +104,11 @@ public class MouseMovement : MonoBehaviour
         
         shootLocations.Add(transform.position);
         rb.AddForce(direction * (strength * shotPower));
+
+        ExecuteEvents.Execute<IGameEventMessageTarget>(rb.gameObject, null, 
+            (handler, data) => handler.OnBallHit());
+        ExecuteEvents.Execute<IGameEventMessageTarget>(rb.gameObject, null,
+            (handler, data) => handler.OnBallLocationUpdate(shootLocations[^1]));
         
         lsm.AddStroke();
     }

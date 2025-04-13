@@ -11,7 +11,9 @@ public class OutOfLevel : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             other.transform.position = other.GetComponent<MouseMovement>().shootLocations[^1];
-            other.GetComponent<Rigidbody>().velocity = Vector3.zero;
+            var rb = other.GetComponent<Rigidbody>();
+            rb.velocity = Vector3.zero;
+            rb.angularVelocity = Vector3.zero;
         }
     }
 }
