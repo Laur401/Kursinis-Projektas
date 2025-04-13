@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 4398700577906866538}
   - component: {fileID: 532701728121861948}
   - component: {fileID: 4141696186963545081}
+  - component: {fileID: 3508172691268187600}
   m_Layer: 0
   m_Name: PlayerBall
   m_TagString: Player
@@ -151,6 +152,24 @@ MonoBehaviour:
   lineRenderer: {fileID: 2079519890468067627}
   stopVelocity: 0.1
   timerLength: 3
+--- !u!114 &3508172691268187600
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 187435757810262155}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3f538d2b0a7aa204ea7d8f54ac1520a5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rewindPowerup: 0
+  jumpPowerup: 0
+  holeMagnetPowerup: 0
+  holeLocation: {fileID: 0}
+  teleportPowerup: 0
+  rb: {fileID: 532701728121861948}
 --- !u!1 &1150325873930747452
 GameObject:
   m_ObjectHideFlags: 0
