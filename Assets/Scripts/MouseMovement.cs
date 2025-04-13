@@ -1,13 +1,14 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Timers;
 using UnityEngine;
 using UnityEngine.ProBuilder.MeshOperations;
 using UnityEngine.Rendering.PostProcessing;
 
 public class MouseMovement : MonoBehaviour
 {
-    [SerializeField] private float shotPower=1;
+    [SerializeField] private float shotPower = 1;
     [SerializeField] private LineRenderer lineRenderer;
     [SerializeField] private float stopVelocity;
     private Vector3 screenPosition;
@@ -15,6 +16,8 @@ public class MouseMovement : MonoBehaviour
     private Rigidbody rb;
     private LevelScoringManager lsm;
     [NonSerialized] public List<Vector3> shootLocations = new();
+    [SerializeField] private float timerLength = 3;
+    private float timer;
 
     private bool isMoving = false;
     
@@ -22,6 +25,7 @@ public class MouseMovement : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         lsm = FindAnyObjectByType<LevelScoringManager>();
+        timer = timerLength;
         shootLocations.Add(transform.position);
     }
 
@@ -103,17 +107,22 @@ public class MouseMovement : MonoBehaviour
         else return worldPoint;*/
     }
     
-    private void CheckMovement() //TODO: Figure out how to optimize this to not need to be called every frame.
+    private void CheckMovement()
     {
         if (rb.velocity.sqrMagnitude < stopVelocity)
         {
-            rb.velocity = Vector3.zero;
-            rb.angularVelocity = Vector3.zero;
-            lineRenderer.enabled = true;
-            isMoving = false;
+            timer -= Time.deltaTime;
+            if (timer <= 0 && isMoving)
+            {
+                rb.velocity = Vector3.zero;
+                rb.angularVelocity = Vector3.zero;
+                lineRenderer.enabled = true;
+                isMoving = false;
+            }
         }
         else
         {
+            timer = timerLength;
             lineRenderer.enabled = false;
             isMoving = true;
         }
