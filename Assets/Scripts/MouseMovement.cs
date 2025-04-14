@@ -1,18 +1,25 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+using System.Timers;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.ProBuilder.MeshOperations;
+using UnityEngine.Rendering.PostProcessing;
 
 public class MouseMovement : MonoBehaviour
 {
-    [SerializeField] private float shotPower=1;
+    [SerializeField] private float shotPower = 1;
     [SerializeField] private LineRenderer lineRenderer;
     [SerializeField] private float stopVelocity;
     private Vector3 screenPosition;
     private Vector3 worldPosition;
     private Rigidbody rb;
     private LevelScoringManager lsm;
+    [NonSerialized] public List<Vector3> shootLocations = new();
+    [SerializeField] private float timerLength = 3;
+    private float timer;
 
     private bool isMoving = false;
     
@@ -20,6 +27,10 @@ public class MouseMovement : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         lsm = FindAnyObjectByType<LevelScoringManager>();
+        timer = timerLength;
+        shootLocations.Add(transform.position);
+        ExecuteEvents.Execute<IGameEventMessageTarget>(rb.gameObject, null,
+            (handler, data) => handler.OnBallLocationUpdate(shootLocations[^1]));
     }
 
     // Update is called once per frame
@@ -28,7 +39,10 @@ public class MouseMovement : MonoBehaviour
         if (!isMoving)
         {
             Vector3? worldPoint = CastMouseClickRay();
+            lineRenderer.enabled = false;
             if (!worldPoint.HasValue) return;
+            worldPoint = ClampMousePoint(worldPoint.Value);
+            
             DrawLine(worldPoint.Value);
         
             if (Input.GetMouseButtonDown(0))
@@ -65,7 +79,13 @@ public class MouseMovement : MonoBehaviour
         Vector3 worldMousePosFar = Camera.main.ScreenToWorldPoint(screenMousePosFar);
         Vector3 worldMousePosNear = Camera.main.ScreenToWorldPoint(screenMousePosNear);
         RaycastHit hit;
-        if (Physics.Raycast(worldMousePosNear, worldMousePosFar - worldMousePosNear, out hit, float.PositiveInfinity))
+
+        int UILayer = LayerMask.NameToLayer("UI");
+        List<RaycastResult> raycastResults = new List<RaycastResult>();
+        EventSystem.current.RaycastAll(new PointerEventData(EventSystem.current){position = Input.mousePosition}, raycastResults);
+        
+        if (Physics.Raycast(worldMousePosNear, worldMousePosFar - worldMousePosNear, out hit, 
+                float.PositiveInfinity) && raycastResults.All(x => x.gameObject.layer != UILayer))
         {
             return hit.point;
         }
@@ -78,27 +98,63 @@ public class MouseMovement : MonoBehaviour
         horizontalWorldPoint.y = transform.position.y;
 
         Vector3 direction = (horizontalWorldPoint - transform.position).normalized;
-        float strength = Vector3.Distance(transform.position, horizontalWorldPoint);
+        float strength = Mathf.Clamp(Vector3.Distance(transform.position, horizontalWorldPoint), 0f, 10f);
+
+        direction = AdjustVelocityDirectionToSlope(direction);
         
+        shootLocations.Add(transform.position);
         rb.AddForce(direction * (strength * shotPower));
+
+        ExecuteEvents.Execute<IGameEventMessageTarget>(rb.gameObject, null, 
+            (handler, data) => handler.OnBallHit());
+        ExecuteEvents.Execute<IGameEventMessageTarget>(rb.gameObject, null,
+            (handler, data) => handler.OnBallLocationUpdate(shootLocations[^1]));
         
         lsm.AddStroke();
     }
+
+    private Vector3 ClampMousePoint(Vector3 worldPoint)
+    {
+        return Vector3.MoveTowards(gameObject.transform.position, worldPoint, 10f);
+        /*if (Vector3.Distance(gameObject.transform.position, worldPoint) > 30f)
+        {
+            return Vector3.MoveTowards(gameObject.transform.position, worldPoint, 30f);
+        }
+        else return worldPoint;*/
+    }
     
-    private void CheckMovement() //TODO: Figure out how to optimize this to not need to be called every frame.
+    private void CheckMovement()
     {
         if (rb.velocity.sqrMagnitude < stopVelocity)
         {
-            rb.velocity = Vector3.zero;
-            rb.angularVelocity = Vector3.zero;
-            lineRenderer.enabled = true;
-            isMoving = false;
+            timer -= Time.deltaTime;
+            if (timer <= 0 && isMoving)
+            {
+                rb.velocity = Vector3.zero;
+                rb.angularVelocity = Vector3.zero;
+                lineRenderer.enabled = true;
+                isMoving = false;
+            }
         }
         else
         {
+            timer = timerLength;
             lineRenderer.enabled = false;
             isMoving = true;
         }
+    }
+
+    private Vector3 AdjustVelocityDirectionToSlope(Vector3 velocity)
+    {
+        Ray ray = new Ray(transform.position, Vector3.down);
+        if (Physics.Raycast(ray, out RaycastHit hitInfo, 0.2f))
+        {
+            var slopeRotation = Quaternion.FromToRotation(Vector3.up, hitInfo.normal);
+            var adjustedVelocity = slopeRotation * velocity;
+            return adjustedVelocity;
+        }
+
+        return velocity;
     }
 
 }
