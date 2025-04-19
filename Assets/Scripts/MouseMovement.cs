@@ -5,11 +5,13 @@ using System.Linq;
 using System.Timers;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.InputSystem;
 using UnityEngine.ProBuilder.MeshOperations;
 using UnityEngine.Rendering.PostProcessing;
 
 public class MouseMovement : MonoBehaviour
 {
+    [SerializeField] private InputActionReference shootInput;
     [SerializeField] private float shotPower = 1;
     [SerializeField] private LineRenderer lineRenderer;
     [SerializeField] private float stopVelocity;
@@ -28,25 +30,32 @@ public class MouseMovement : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         lsm = FindAnyObjectByType<LevelScoringManager>();
         timer = timerLength;
+        shootInput.action.Enable();
+        shootInput.action.performed += ShootInput;
         shootLocations.Add(transform.position);
         ExecuteEvents.Execute<IGameEventMessageTarget>(rb.gameObject, null,
             (handler, data) => handler.OnBallLocationUpdate(shootLocations[^1]));
     }
 
+    void ShootInput(InputAction.CallbackContext context)
+    {
+        if (isMoving) return;
+        if (!worldPoint.HasValue) return;
+        Shoot(worldPoint.Value);
+    }
+
+    private Vector3? worldPoint = new();
     // Update is called once per frame
     void Update()
     {
         if (!isMoving)
         {
-            Vector3? worldPoint = CastMouseClickRay();
+            worldPoint = CastMouseClickRay();
             lineRenderer.enabled = false;
             if (!worldPoint.HasValue) return;
             worldPoint = ClampMousePoint(worldPoint.Value);
             
             DrawLine(worldPoint.Value);
-        
-            if (Input.GetMouseButtonDown(0))
-                Shoot(worldPoint.Value);
         }
         
     }

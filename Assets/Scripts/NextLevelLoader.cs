@@ -6,15 +6,21 @@ using UnityEngine.SceneManagement;
 
 public class NextLevelLoader : MonoBehaviour
 {
+	
+	[SerializeField] private AudioSource audioSource;
+    [SerializeField] private AudioClip winSound;
+	
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player")) //TODO: Replace with direct player object testing
+        if (other.CompareTag("Player")) 
         {
             StartCoroutine(LoadNextLevel());
         }
     }
     private IEnumerator LoadNextLevel()
     {
+		//audioSource.volume = 0.4f;
+		//audioSource.PlayOneShot(winSound); //skamba, bet geriau be pridėjimo
         yield return new WaitForSecondsRealtime(3);
         int index = SceneManager.GetActiveScene().buildIndex;
         if (index+1 < SceneManager.sceneCountInBuildSettings)
