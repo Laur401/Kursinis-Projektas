@@ -7,9 +7,9 @@ using UnityEngine.SceneManagement;
 
 public class UIInfoElements : MonoBehaviour
 {
-    private TextMeshProUGUI strokeText;
-    private TextMeshProUGUI parText;
-    private TextMeshProUGUI holeText;
+    private TMP_Text strokeText;
+    private TMP_Text parText;
+    private TMP_Text holeText;
 
     private void Awake()
     {
@@ -19,9 +19,8 @@ public class UIInfoElements : MonoBehaviour
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        // Replace with tags? Could be tag-list-wasteful though.
-        var textObjects = FindAnyObjectByType<Canvas>().GetComponentsInChildren<TextMeshProUGUI>();
-        foreach (TextMeshProUGUI textObject in textObjects)
+        var textObjects = FindObjectsByType<TMP_Text>(FindObjectsInactive.Exclude, FindObjectsSortMode.None);
+        foreach (TMP_Text textObject in textObjects)
         {
             switch (textObject.gameObject.name)
             {
