@@ -5721,6 +5721,39 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 176303132094377576, guid: f6161b132a67a30508a329f653f458da, type: 3}
   m_PrefabInstance: {fileID: 1512819430}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1512819433 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6430524765300690584, guid: f6161b132a67a30508a329f653f458da, type: 3}
+  m_PrefabInstance: {fileID: 1512819430}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1512819434 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6845372927079538116, guid: f6161b132a67a30508a329f653f458da, type: 3}
+  m_PrefabInstance: {fileID: 1512819430}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1512819435 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8513505052654912928, guid: f6161b132a67a30508a329f653f458da, type: 3}
+  m_PrefabInstance: {fileID: 1512819430}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &1514421856 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3739780820254312643, guid: 11fe41de80282e349b85cf2888939307, type: 3}
@@ -8868,6 +8901,18 @@ PrefabInstance:
       propertyPath: audioSource
       value: 
       objectReference: {fileID: 543903262}
+    - target: {fileID: 5452284007381376402, guid: 83fc24c7510c37856a2798e06f523f0d, type: 3}
+      propertyPath: UIButtons.Array.data[0]
+      value: 
+      objectReference: {fileID: 1512819435}
+    - target: {fileID: 5452284007381376402, guid: 83fc24c7510c37856a2798e06f523f0d, type: 3}
+      propertyPath: UIButtons.Array.data[1]
+      value: 
+      objectReference: {fileID: 1512819434}
+    - target: {fileID: 5452284007381376402, guid: 83fc24c7510c37856a2798e06f523f0d, type: 3}
+      propertyPath: UIButtons.Array.data[2]
+      value: 
+      objectReference: {fileID: 1512819433}
     - target: {fileID: 8506636711590885859, guid: 83fc24c7510c37856a2798e06f523f0d, type: 3}
       propertyPath: m_Name
       value: Player

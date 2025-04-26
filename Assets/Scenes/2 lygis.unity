@@ -2564,6 +2564,39 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 176303132094377576, guid: f6161b132a67a30508a329f653f458da, type: 3}
   m_PrefabInstance: {fileID: 1149329781}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1149329784 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6430524765300690584, guid: f6161b132a67a30508a329f653f458da, type: 3}
+  m_PrefabInstance: {fileID: 1149329781}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1149329785 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6845372927079538116, guid: f6161b132a67a30508a329f653f458da, type: 3}
+  m_PrefabInstance: {fileID: 1149329781}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1149329786 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8513505052654912928, guid: f6161b132a67a30508a329f653f458da, type: 3}
+  m_PrefabInstance: {fileID: 1149329781}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &1154238095 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2626426390641641761, guid: 0921fe7c286fdda46b63b4cb816982f1, type: 3}
@@ -3405,22 +3438,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 3508172691268187600, guid: 6c7d26340c9e4ca5db512bdbffad6e41, type: 3}
-      propertyPath: holeLocation
-      value: 
-      objectReference: {fileID: 31292085}
-    - target: {fileID: 4141696186963545081, guid: 6c7d26340c9e4ca5db512bdbffad6e41, type: 3}
-      propertyPath: shotPower
-      value: 140
-      objectReference: {fileID: 0}
-    - target: {fileID: 6668299697317660460, guid: 6c7d26340c9e4ca5db512bdbffad6e41, type: 3}
-      propertyPath: speed
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 8312722274843442346, guid: 6c7d26340c9e4ca5db512bdbffad6e41, type: 3}
-      propertyPath: audioSource
-      value: 
-      objectReference: {fileID: 543903262}
     - target: {fileID: 793694363784457488, guid: 83fc24c7510c37856a2798e06f523f0d, type: 3}
       propertyPath: holeLocation
       value: 
@@ -3485,6 +3502,18 @@ PrefabInstance:
       propertyPath: audioSource
       value: 
       objectReference: {fileID: 543903262}
+    - target: {fileID: 5452284007381376402, guid: 83fc24c7510c37856a2798e06f523f0d, type: 3}
+      propertyPath: UIButtons.Array.data[0]
+      value: 
+      objectReference: {fileID: 1149329786}
+    - target: {fileID: 5452284007381376402, guid: 83fc24c7510c37856a2798e06f523f0d, type: 3}
+      propertyPath: UIButtons.Array.data[1]
+      value: 
+      objectReference: {fileID: 1149329785}
+    - target: {fileID: 5452284007381376402, guid: 83fc24c7510c37856a2798e06f523f0d, type: 3}
+      propertyPath: UIButtons.Array.data[2]
+      value: 
+      objectReference: {fileID: 1149329784}
     - target: {fileID: 8506636711590885859, guid: 83fc24c7510c37856a2798e06f523f0d, type: 3}
       propertyPath: m_Name
       value: PlayerWithStrokeLabel
@@ -3497,6 +3526,22 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 3508172691268187600, guid: 6c7d26340c9e4ca5db512bdbffad6e41, type: 3}
+      propertyPath: holeLocation
+      value: 
+      objectReference: {fileID: 31292085}
+    - target: {fileID: 4141696186963545081, guid: 6c7d26340c9e4ca5db512bdbffad6e41, type: 3}
+      propertyPath: shotPower
+      value: 140
+      objectReference: {fileID: 0}
+    - target: {fileID: 6668299697317660460, guid: 6c7d26340c9e4ca5db512bdbffad6e41, type: 3}
+      propertyPath: speed
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 8312722274843442346, guid: 6c7d26340c9e4ca5db512bdbffad6e41, type: 3}
+      propertyPath: audioSource
+      value: 
+      objectReference: {fileID: 543903262}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

@@ -7,4 +7,6 @@ public interface IGameEventMessageTarget : IEventSystemHandler
 {
     void OnBallHit() { } //Brackets make the method optional
     void OnBallLocationUpdate(Vector3 newLocation) { }
+    
+    void OnPowerupCollection() { }
 }

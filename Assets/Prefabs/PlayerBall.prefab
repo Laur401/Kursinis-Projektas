@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 4141696186963545081}
   - component: {fileID: 3508172691268187600}
   - component: {fileID: 8312722274843442346}
+  - component: {fileID: 8072187496594441554}
   m_Layer: 0
   m_Name: PlayerBall
   m_TagString: Player
@@ -186,6 +187,74 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   audioSource: {fileID: 0}
   shootSound: {fileID: 8300000, guid: 7ca81551d4864de4c82485ae906208c1, type: 3}
+--- !u!114 &8072187496594441554
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 187435757810262155}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00e1ebf27e2c20652a721366f5165fb4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  UIButtons:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  powerups:
+  - buttonText: Magnet
+    buttonSprite: {fileID: 0}
+    buttonClicked:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 3508172691268187600}
+          m_TargetAssemblyTypeName: Powerups, Assembly-CSharp
+          m_MethodName: OnHoleMagnetActivate
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - buttonText: Jump
+    buttonSprite: {fileID: 0}
+    buttonClicked:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 3508172691268187600}
+          m_TargetAssemblyTypeName: Powerups, Assembly-CSharp
+          m_MethodName: OnJumpPowerupActivate
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - buttonText: Rewind
+    buttonSprite: {fileID: 0}
+    buttonClicked:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 3508172691268187600}
+          m_TargetAssemblyTypeName: Powerups, Assembly-CSharp
+          m_MethodName: OnRewindPowerupActivate
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &1150325873930747452
 GameObject:
   m_ObjectHideFlags: 0
