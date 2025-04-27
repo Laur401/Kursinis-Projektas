@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: 3508172691268187600}
   - component: {fileID: 8312722274843442346}
   - component: {fileID: 8072187496594441554}
+  - component: {fileID: 5857522878528283590}
   m_Layer: 0
   m_Name: PlayerBall
   m_TagString: Player
@@ -150,11 +151,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 97a8eaf3f18a333bf9d29f0c8d7093a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shootInput: {fileID: 208314852866061827, guid: 29ff6dfda90ac3663a6c8e237ca94840, type: 3}
   shotPower: 140
   lineRenderer: {fileID: 2079519890468067627}
   stopVelocity: 0.1
   timerLength: 3
+  isDisabled: 0
 --- !u!114 &3508172691268187600
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -171,6 +172,8 @@ MonoBehaviour:
   jumpPowerup: 0
   holeMagnetPowerup: 0
   holeLocation: {fileID: 0}
+  magnetLength: 5
+  magnetStrength: 10
   teleportPowerup: 0
   rb: {fileID: 532701728121861948}
 --- !u!114 &8312722274843442346
@@ -255,6 +258,36 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+  - buttonText: Teleport
+    buttonSprite: {fileID: 0}
+    buttonClicked:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 3508172691268187600}
+          m_TargetAssemblyTypeName: Powerups, Assembly-CSharp
+          m_MethodName: OnTeleportPowerupActivate
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+--- !u!114 &5857522878528283590
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 187435757810262155}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 03c83dcca44e7125b9454f816206de10, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shootInput: {fileID: 208314852866061827, guid: 29ff6dfda90ac3663a6c8e237ca94840, type: 3}
 --- !u!1 &1150325873930747452
 GameObject:
   m_ObjectHideFlags: 0

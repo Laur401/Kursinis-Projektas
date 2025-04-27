@@ -5,8 +5,9 @@ using UnityEngine.EventSystems;
 
 public interface IGameEventMessageTarget : IEventSystemHandler
 {
-    void OnBallHit() { } //Brackets make the method optional
+    void OnBallHitInput() { } //Brackets make the method optional
     void OnBallLocationUpdate(Vector3 newLocation) { }
-    
     void OnPowerupCollection() { }
+    void OnMousePowerupEnable() { }
+    void OnMousePowerupDisable() { }
 }

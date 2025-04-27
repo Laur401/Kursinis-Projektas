@@ -14,7 +14,6 @@ public class PowerupButtonUnlocker : MonoBehaviour, IGameEventMessageTarget
     private void Start()
     {
         UnityEngine.Random.InitState((int)System.DateTime.Now.Ticks);
-        //OnPowerupCollection();
     }
     
     public void OnPowerupCollection()

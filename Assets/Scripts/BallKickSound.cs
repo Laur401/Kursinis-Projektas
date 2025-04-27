@@ -5,5 +5,5 @@ public class BallKickSound : MonoBehaviour, IGameEventMessageTarget
     [SerializeField] private AudioSource audioSource;
     [SerializeField] private AudioClip shootSound;
     
-    public void OnBallHit() => audioSource.PlayOneShot(shootSound);
+    public void OnBallHitInput() => audioSource.PlayOneShot(shootSound);
 }
