@@ -19,20 +19,26 @@ public class LevelScoringManager : MonoBehaviour, IGameEventMessageTarget
         _saveDataManager = FindAnyObjectByType<SaveDataManager>();
         _scorePanelManager = FindAnyObjectByType<ScorePanelManager>();
         
-        _uiElements.SetHole(_levelVariables.hole);
-        _uiElements.SetPar(_levelVariables.par);
-        _uiElements.SetStroke(_currentStroke);
-
-        var levelData = _saveDataManager?.ReadLevel(_levelVariables.hole);
-        if (levelData == null)
-        {
-            _saveDataManager?.AddLevel(_levelVariables.hole, _levelVariables.par, _currentStroke);
-            levelData = _saveDataManager?.ReadLevel(_levelVariables.hole);
-        }
-        
         _scorePanelManager.LoadWholePanel(_saveDataManager.ReadLevel);
-        _scorePanelManager?.SetPar(levelData.Value.levelID, levelData.Value.par);
-        _scorePanelManager?.SetStroke(levelData.Value.levelID, _currentStroke);
+        
+        if (_uiElements != null)
+        {
+            _uiElements?.SetHole(_levelVariables.hole);
+            _uiElements?.SetPar(_levelVariables.par);
+            _uiElements?.SetStroke(_currentStroke);
+        }
+
+        if (_levelVariables != null)
+        {
+            var levelData = _saveDataManager?.ReadLevel(_levelVariables.hole);
+            if (levelData == null)
+            {
+                _saveDataManager?.AddLevel(_levelVariables.hole, _levelVariables.par, _currentStroke);
+                levelData = _saveDataManager?.ReadLevel(_levelVariables.hole);
+            }
+            _scorePanelManager?.SetPar(levelData.Value.levelID, levelData.Value.par);
+            _scorePanelManager?.SetScore(levelData.Value.levelID, _currentStroke - levelData.Value.par);
+        }
     }
 
     public void AddStroke()
@@ -40,7 +46,7 @@ public class LevelScoringManager : MonoBehaviour, IGameEventMessageTarget
         _currentStroke++;
         _uiElements.SetStroke(_currentStroke);
         _saveDataManager?.ModifyLevel(_levelVariables.hole, hitCount: _currentStroke);
-        _scorePanelManager?.SetStroke(_levelVariables.hole, _currentStroke);
+        _scorePanelManager?.SetScore(_levelVariables.hole, _currentStroke - _levelVariables.par);
     }
 
     public void OnSaveButtonPress() => SaveScoringData();

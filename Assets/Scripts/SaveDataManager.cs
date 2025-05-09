@@ -24,10 +24,6 @@ public class SaveDataManager : MonoBehaviour
     public void SaveData()
     {
         var json = JsonUtility.ToJson(jsonData);
-        Debug.Log(json);
-        Debug.Log(jsonData);
-        Debug.Log(jsonData.levels);
-        Debug.Log(jsonData.levels.Count);
         File.WriteAllText(saveFilePath, json);
     }
     

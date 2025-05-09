@@ -12,15 +12,13 @@ public class ScorePanelManager : MonoBehaviour
     {
         for (int i = 0; i < panels.Count; i++)
         {
-            var result = getScore(i + 1);
-            if (result == null) continue;
-            var (_, par, hitCount) = getScore(i + 1)!.Value;
+            var (_, par, hitCount) = getScore(i + 1) ?? (0, 0, 0);
             panels[i].par.text = par.ToString();
             panels[i].score.text = hitCount.ToString();
         }
     }
     
-    public void SetStroke(int id, int stroke)
+    public void SetScore(int id, int stroke)
     {
         panels[id - 1].score.text = stroke.ToString();
     }
