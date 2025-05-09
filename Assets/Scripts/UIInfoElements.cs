@@ -10,6 +10,7 @@ public class UIInfoElements : MonoBehaviour
     private TMP_Text strokeText;
     private TMP_Text parText;
     private TMP_Text holeText;
+    private string test;
 
     private void Awake()
     {
