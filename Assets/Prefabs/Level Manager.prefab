@@ -13,6 +13,8 @@ GameObject:
   - component: {fileID: 1149683313246708116}
   - component: {fileID: 6658200935788352309}
   - component: {fileID: 1230787735277991746}
+  - component: {fileID: 5334628409982229277}
+  - component: {fileID: 7361573675237879752}
   m_Layer: 0
   m_Name: Level Manager
   m_TagString: Untagged
@@ -87,3 +89,40 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pauseInput: {fileID: -6019991433677205395, guid: 29ff6dfda90ac3663a6c8e237ca94840, type: 3}
   panel: {fileID: 0}
+  otherPanels:
+  - {fileID: 0}
+  - {fileID: 0}
+  scriptsToChangeState:
+  - {fileID: 0}
+  - {fileID: 0}
+--- !u!114 &5334628409982229277
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5180881875788257575}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 66d434ddb57e8e1cebf5ea11013cfe03, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  panels:
+  - par: {fileID: 0}
+    score: {fileID: 0}
+  - par: {fileID: 0}
+    score: {fileID: 0}
+  - par: {fileID: 0}
+    score: {fileID: 0}
+--- !u!114 &7361573675237879752
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5180881875788257575}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2e724373a2bf17fd58f05f21b76dc48c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

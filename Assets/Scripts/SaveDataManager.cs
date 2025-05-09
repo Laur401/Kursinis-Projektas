@@ -3,22 +3,31 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using Unity.Serialization.Json;
 using UnityEngine;
 
 public class SaveDataManager : MonoBehaviour
 {
-    private readonly string saveFilePath = Path.Combine(Application.persistentDataPath, "save.json");
+    private string saveFilePath;
     private JsonData jsonData = new JsonData();
 
     private void Start()
     {
+        saveFilePath = Path.Combine(Application.persistentDataPath, "save.json");
+        Debug.Log(saveFilePath);
+        if (!File.Exists(saveFilePath)) File.Create(saveFilePath);
         LoadData();
+        jsonData.levels ??= new List<LevelData>();
     }
 
     public void SaveData()
     {
         var json = JsonUtility.ToJson(jsonData);
+        Debug.Log(json);
+        Debug.Log(jsonData);
+        Debug.Log(jsonData.levels);
+        Debug.Log(jsonData.levels.Count);
         File.WriteAllText(saveFilePath, json);
     }
     
@@ -45,17 +54,19 @@ public class SaveDataManager : MonoBehaviour
         }
     }
 
-    public (int levelID, int par, int hitCount) ReadLevel(int id)
+    public (int levelID, int par, int hitCount)? ReadLevel(int id)
     {
         var search = jsonData.levels.FirstOrDefault(x => x.levelID == id);
-        return search == null ? (0, 0, 0) : (search.levelID, search.par, search.hitCount);
+        return search == null ? null : (search.levelID, search.par, search.hitCount);
     }
 }
 
+[Serializable]
 class JsonData
 {
     public List<LevelData> levels;
 }
+[Serializable]
 class LevelData
 {
     public int levelID;

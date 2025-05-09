@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 
@@ -42,4 +43,7 @@ public class UIPauseMenu : MonoBehaviour
     public void ResumeButton() => TogglePause(new InputAction.CallbackContext());
 
     public void MainMenuButton() => SceneManager.LoadSceneAsync(0);
+    
+    /*public void SaveButton() => ExecuteEvents.Execute<IGameEventMessageTarget>
+    (FindAnyObjectByType<LevelScoringManager>().gameObject, null, (handler, data) => handler.OnSaveButtonPress());*/
 }

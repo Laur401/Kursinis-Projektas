@@ -10,4 +10,6 @@ public interface IGameEventMessageTarget : IEventSystemHandler
     void OnPowerupCollection() { }
     void OnMousePowerupEnable() { }
     void OnMousePowerupDisable() { }
+    void OnSaveButtonPress() { }
+    void OnNextLevelLoad() { }
 }
