@@ -1,6 +1,9 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class Powerups : MonoBehaviour, IGameEventMessageTarget
 {
@@ -8,6 +11,8 @@ public class Powerups : MonoBehaviour, IGameEventMessageTarget
     [SerializeField] private bool jumpPowerup = false;
     [SerializeField] private bool holeMagnetPowerup = false;
     [SerializeField] private GameObject holeLocation;
+    [SerializeField] private float magnetLength = 5;
+    [SerializeField] private float magnetStrength = 10;
     [SerializeField] private bool teleportPowerup = false;
     [SerializeField] private Rigidbody rb;
     private Stack<Vector3> lastLocationStack = new();
@@ -19,13 +24,15 @@ public class Powerups : MonoBehaviour, IGameEventMessageTarget
         if (rewindPowerup) {RewindPowerup(); rewindPowerup = false;}
         if (jumpPowerup) {StartCoroutine(JumpPowerup()); jumpPowerup = false;}
         if (holeMagnetPowerup) {StartCoroutine(HoleMagnetPowerup()); holeMagnetPowerup = false;}
-        if (teleportPowerup) {TeleportPowerup(); teleportPowerup = false;}
+        if (teleportPowerup) {StartCoroutine(TeleportPowerup()); teleportPowerup = false;}
     }
 
     private void RewindPowerup()
     {
-        if (lastLocationStack.Count!=0)
-            rb.gameObject.transform.position = lastLocationStack.Pop();
+        if (lastLocationStack.Count <= 0) return;
+        rb.gameObject.transform.position = lastLocationStack.Pop();
+        rb.velocity = Vector3.zero;
+        rb.angularVelocity = Vector3.zero;
     }
 
     private IEnumerator JumpPowerup()
@@ -39,21 +46,36 @@ public class Powerups : MonoBehaviour, IGameEventMessageTarget
     {
         float timer = 0;
         Vector3 direction = (holeLocation.transform.position - rb.gameObject.transform.position).normalized;
-        while (timer < 5) //TODO: Replace with serialized value later
+        while (timer < magnetLength)
         {
             timer += Time.deltaTime;
-            rb.AddForce(direction * 20, ForceMode.Force);
+            rb.AddForce(direction * magnetStrength, ForceMode.Force);
             yield return null;
         }
     }
 
-    private void TeleportPowerup()
+    private IEnumerator TeleportPowerup()
     {
-        
+        Vector3? location = null;
+        ExecuteEvents.Execute<IGameEventMessageTarget>(rb.gameObject, null, 
+            (handler, data) => handler.OnMousePowerupEnable());
+        while (!ballHit || location == null)
+        {
+            location = MouseReader.CastMouseClickRay();
+            yield return null;
+        }
+        rb.gameObject.transform.position = location.Value;
+        ExecuteEvents.Execute<IGameEventMessageTarget>(rb.gameObject, null, 
+            (handler, data) => handler.OnMousePowerupDisable());
     }
 
-    public void OnBallHit() => ballHit = true;
+    public void OnBallHitInput() => ballHit = true;
     public void OnBallLocationUpdate(Vector3 newLocation) => lastLocationStack.Push(newLocation);
+
+    private void LateUpdate()
+    {
+        ballHit = false;
+    }
 
     public void OnRewindPowerupActivate() => rewindPowerup = true;
     public void OnJumpPowerupActivate() => jumpPowerup = true;

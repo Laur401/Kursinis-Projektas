@@ -5,6 +5,6 @@ using UnityEngine.Serialization;
 
 public class LevelVariables : MonoBehaviour
 {
-    public int hole; //Potentially replace with read from scenes list
+    public int hole;
     public int par;
 }
