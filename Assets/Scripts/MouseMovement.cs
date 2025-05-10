@@ -95,6 +95,8 @@ public class MouseMovement : MonoBehaviour, IGameEventMessageTarget
         shootLocations.Add(transform.position);
         ExecuteEvents.Execute<IGameEventMessageTarget>(rb.gameObject, null,
             (handler, data) => handler.OnBallLocationUpdate(shootLocations[^1]));
+        ExecuteEvents.Execute<IGameEventMessageTarget>(rb.gameObject, null,
+            (handler, data) => handler.OnBallHit());
         
         rb.AddForce(direction * (strength * shotPower));
         lsm.AddStroke();

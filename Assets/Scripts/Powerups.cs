@@ -46,10 +46,10 @@ public class Powerups : MonoBehaviour, IGameEventMessageTarget
     private IEnumerator HoleMagnetPowerup()
     {
         float timer = 0;
-        Vector3 direction = (holeLocation.transform.position - rb.gameObject.transform.position).normalized;
         while (timer < magnetLength)
         {
             timer += Time.deltaTime;
+            Vector3 direction = (holeLocation.transform.position - rb.gameObject.transform.position).normalized;
             rb.AddForce(direction * magnetStrength, ForceMode.Force);
             yield return null;
         }
