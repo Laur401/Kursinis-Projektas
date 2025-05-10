@@ -4,12 +4,15 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityProgressBar;
+
 
 public class UIInfoElements : MonoBehaviour
 {
     private TMP_Text strokeText;
     private TMP_Text parText;
     private TMP_Text holeText;
+    private ProgressBar progressBar;
     private string test;
 
     private void Awake()
@@ -36,6 +39,14 @@ public class UIInfoElements : MonoBehaviour
                     break;
             }
         }
+        var progressBars = FindObjectsByType<ProgressBar>(FindObjectsSortMode.None);
+        foreach (var p in progressBars)
+        {
+            if (p.gameObject.name == "Strength Bar")
+            {
+                progressBar = p;
+            }
+        }
     }
 
     public void SetStroke(int stroke)
@@ -51,5 +62,10 @@ public class UIInfoElements : MonoBehaviour
     public void SetHole(int hole)
     {
         holeText.text = $"Hole {hole}";
+    }
+
+    public void SetStrength(float value)
+    {
+        progressBar.Value = value;
     }
 }

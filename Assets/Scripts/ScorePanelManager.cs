@@ -14,13 +14,19 @@ public class ScorePanelManager : MonoBehaviour
         {
             var (_, par, hitCount) = getScore(i + 1) ?? (0, 0, 0);
             panels[i].par.text = par.ToString();
-            panels[i].score.text = hitCount.ToString();
+            panels[i].stroke.text = hitCount.ToString();
+            panels[i].score.text = (hitCount - par).ToString();
         }
     }
     
-    public void SetScore(int id, int stroke)
+    public void SetScore(int id, int score)
     {
-        panels[id - 1].score.text = stroke.ToString();
+        panels[id - 1].score.text = score.ToString();
+    }
+
+    public void SetStroke(int id, int stroke)
+    {
+        panels[id - 1].stroke.text = stroke.ToString();
     }
     public void SetPar(int id, int par)
     {
@@ -32,6 +38,7 @@ public class ScorePanelManager : MonoBehaviour
 public class LevelPanel
 {
     public TMP_Text par;
+    public TMP_Text stroke;
     public TMP_Text score;
 }
 

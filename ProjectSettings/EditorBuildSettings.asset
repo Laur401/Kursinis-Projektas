@@ -18,6 +18,6 @@ EditorBuildSettings:
     path: Assets/Scenes/3 lygis.unity
     guid: 8b699dafffb738a4b88ebf6a18cb7dad
   - enabled: 1
-    path: Assets/Scenes/DemoEnd.unity
-    guid: 91e5ca3cf28f1a8a5b3fb0b8fe96b0be
+    path: Assets/Scenes/FinalScoreboard.unity
+    guid: bb45c91ef5ee0576dbf961db539e8297
   m_configObjects: {}

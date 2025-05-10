@@ -25,7 +25,7 @@ public class MouseReader : MonoBehaviour
         shootInput.action.performed -= SendBallHitInput;
     }
 
-    public static Vector3? CastMouseClickRay()
+    public static Vector3? CastMouseRay()
     {
         Vector3 screenMousePosFar = new Vector3(
             Input.mousePosition.x,
@@ -39,11 +39,11 @@ public class MouseReader : MonoBehaviour
         Vector3 worldMousePosNear = Camera.main.ScreenToWorldPoint(screenMousePosNear);
 
         int UILayer = LayerMask.NameToLayer("UI");
-        List<RaycastResult> raycastResults = new List<RaycastResult>();
-        EventSystem.current.RaycastAll(new PointerEventData(EventSystem.current){position = Input.mousePosition}, raycastResults);
+        List<RaycastResult> UIRaycastResults = new List<RaycastResult>();
+        EventSystem.current.RaycastAll(new PointerEventData(EventSystem.current){position = Input.mousePosition}, UIRaycastResults);
         
         if (Physics.Raycast(worldMousePosNear, worldMousePosFar - worldMousePosNear, 
-                out var hit, float.PositiveInfinity) && raycastResults.All(x => x.gameObject.layer != UILayer))
+                out var hit, float.PositiveInfinity) && UIRaycastResults.All(x => x.gameObject.layer != UILayer))
         {
             return hit.point;
         }

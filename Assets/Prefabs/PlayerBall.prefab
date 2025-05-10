@@ -154,6 +154,7 @@ MonoBehaviour:
   shotPower: 140
   lineRenderer: {fileID: 2079519890468067627}
   stopVelocity: 0.1
+  maxShootDistance: 10
   timerLength: 3
   isDisabled: 0
 --- !u!114 &3508172691268187600
@@ -300,7 +301,7 @@ GameObject:
   - component: {fileID: 2079519890468067627}
   m_Layer: 0
   m_Name: Path
-  m_TagString: Untagged
+  m_TagString: PlayerPointer
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

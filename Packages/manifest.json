@@ -1,6 +1,8 @@
 {
   "dependencies": {
+    "com.annulusgames.ugui-progress-bar": "https://github.com/AnnulusGames/UnityProgressBar.git?path=Assets/UnityProgressBar",
     "com.unity.2d.sprite": "1.0.0",
+    "com.unity.autolod": "https://github.com/Unity-Technologies/AutoLOD.git",
     "com.unity.cinemachine": "2.10.3",
     "com.unity.feature.development": "1.0.1",
     "com.unity.feature.worldbuilding": "1.0.1",
@@ -12,6 +14,7 @@
     "com.unity.render-pipelines.core": "14.0.11",
     "com.unity.serialization": "3.1.2",
     "com.unity.textmeshpro": "3.0.9",
+    "com.whinarn.unitymeshsimplifier": "https://github.com/Whinarn/UnityMeshSimplifier.git",
     "com.unity.modules.ai": "1.0.0",
     "com.unity.modules.androidjni": "1.0.0",
     "com.unity.modules.animation": "1.0.0",

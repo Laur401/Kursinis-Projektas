@@ -40,6 +40,11 @@ public class UIPauseMenu : MonoBehaviour
         foreach (var s in scriptsToChangeState) s.enabled = !isPanelActive;
     }
 
+    private void OnDestroy()
+    {
+        pauseInput.action.performed -= TogglePause;
+    }
+
     public void ResumeButton() => TogglePause(new InputAction.CallbackContext());
 
     public void MainMenuButton() => SceneManager.LoadSceneAsync(0);

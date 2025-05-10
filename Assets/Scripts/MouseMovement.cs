@@ -26,10 +26,13 @@ public class MouseMovement : MonoBehaviour, IGameEventMessageTarget
     private bool isMoving = false;
     [SerializeField] private bool isDisabled = false;
     
+    private UIInfoElements _uiElements;
+    
     void Start()
     {
         rb = GetComponent<Rigidbody>();
         lsm = FindAnyObjectByType<LevelScoringManager>();
+        _uiElements = FindAnyObjectByType<UIInfoElements>();
         timer = timerLength;
         shootLocations.Add(transform.position);
         ExecuteEvents.Execute<IGameEventMessageTarget>(rb.gameObject, null,
@@ -47,13 +50,20 @@ public class MouseMovement : MonoBehaviour, IGameEventMessageTarget
     // Update is called once per frame
     void Update()
     {
-        lineRenderer.enabled = false;
-        if (isMoving || isDisabled) return;
+        if (isMoving || isDisabled)
+        {
+            lineRenderer.enabled = false;
+            _uiElements.SetStrength(0f);
+            return;
+        }
         lineRenderer.enabled = true;
         
-        worldPoint = MouseReader.CastMouseClickRay();
-        if (!worldPoint.HasValue) return;
+        worldPoint = MouseReader.CastMouseRay();
         
+        
+        
+        if (!worldPoint.HasValue) return;
+        _uiElements.SetStrength(GetStrengthNormalized(worldPoint.Value));
         worldPoint = ClampMousePoint(worldPoint.Value);
         DrawLine(worldPoint.Value);
 
@@ -90,6 +100,13 @@ public class MouseMovement : MonoBehaviour, IGameEventMessageTarget
         lsm.AddStroke();
     }
 
+    private float GetStrengthNormalized(Vector3 worldPoint)
+    {
+        Vector3 horizontalWorldPoint = worldPoint;
+        horizontalWorldPoint.y = transform.position.y;
+        return Mathf.Clamp(Vector3.Distance(transform.position, horizontalWorldPoint), 0f, maxShootDistance)/maxShootDistance;
+    }
+
     private Vector3 ClampMousePoint(Vector3 worldPoint)
     {
         return Vector3.MoveTowards(gameObject.transform.position, worldPoint, maxShootDistance);
@@ -119,8 +136,10 @@ public class MouseMovement : MonoBehaviour, IGameEventMessageTarget
         Ray ray = new Ray(transform.position, Vector3.down);
         if (Physics.Raycast(ray, out RaycastHit hitInfo, 0.2f))
         {
+            //Debug.DrawRay(hitInfo.point, hitInfo.normal, Color.green, 5f);
             var slopeRotation = Quaternion.FromToRotation(Vector3.up, hitInfo.normal);
             var adjustedVelocity = slopeRotation * velocity;
+            //Debug.DrawRay(transform.position, adjustedVelocity*10, Color.red, 5f);
             return adjustedVelocity;
         }
 

@@ -9,6 +9,7 @@ public class Powerups : MonoBehaviour, IGameEventMessageTarget
 {
     [SerializeField] private bool rewindPowerup = false;
     [SerializeField] private bool jumpPowerup = false;
+    [SerializeField] private float jumpStrength = 10;
     [SerializeField] private bool holeMagnetPowerup = false;
     [SerializeField] private GameObject holeLocation;
     [SerializeField] private float magnetLength = 5;
@@ -39,7 +40,7 @@ public class Powerups : MonoBehaviour, IGameEventMessageTarget
     {
         yield return new WaitUntil(()=>ballHit);
         ballHit = false;
-        rb.AddForce(Vector3.up * 10, ForceMode.Impulse);
+        rb.AddForce(Vector3.up * jumpStrength, ForceMode.Impulse);
     }
 
     private IEnumerator HoleMagnetPowerup()
@@ -61,7 +62,7 @@ public class Powerups : MonoBehaviour, IGameEventMessageTarget
             (handler, data) => handler.OnMousePowerupEnable());
         while (!ballHit || location == null)
         {
-            location = MouseReader.CastMouseClickRay();
+            location = MouseReader.CastMouseRay();
             yield return null;
         }
         rb.gameObject.transform.position = location.Value;
