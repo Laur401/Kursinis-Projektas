@@ -12,7 +12,7 @@ public class Powerups : MonoBehaviour, IGameEventMessageTarget
     [SerializeField] private bool holeMagnetPowerup = false;
     [SerializeField] private GameObject holeLocation;
     [SerializeField] private float magnetLength = 5;
-    [SerializeField] private float magnetStrength = 10;
+    [SerializeField] private float magnetStrength = 5;
     [SerializeField] private bool teleportPowerup = false;
     [SerializeField] private Rigidbody rb;
     private Stack<Vector3> lastLocationStack = new();
