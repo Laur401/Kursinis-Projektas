@@ -10,7 +10,7 @@ public class DifficultyApplier : MonoBehaviour
     {
         if (!Enum.TryParse(PlayerPrefs.GetString("difficulty"), out difficultyLevel))
             difficultyLevel = DifficultyLevel.Easy;
-
+        
         if (difficultyLevel == DifficultyLevel.Easy) return;
         
         foreach (var o in GameObject.FindGameObjectsWithTag("PowerupUI"))

@@ -43,6 +43,7 @@ public class UIPauseMenu : MonoBehaviour
     private void OnDestroy()
     {
         pauseInput.action.performed -= TogglePause;
+        Time.timeScale = 1;
     }
 
     public void ResumeButton() => TogglePause(new InputAction.CallbackContext());

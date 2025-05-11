@@ -60,8 +60,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Holder
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedComponents:
+    - {fileID: 4742473837712756890, guid: 53dc2c203ba87484fb657b18cce4c255, type: 3}
+    m_RemovedGameObjects:
+    - {fileID: -5847156255732510540, guid: 53dc2c203ba87484fb657b18cce4c255, type: 3}
+    - {fileID: -457575727092137101, guid: 53dc2c203ba87484fb657b18cce4c255, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 53dc2c203ba87484fb657b18cce4c255, type: 3}

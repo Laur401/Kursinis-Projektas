@@ -68,8 +68,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: ramp
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedComponents:
+    - {fileID: 4742473837712756890, guid: a911931445726b742a6a857d86632e65, type: 3}
+    m_RemovedGameObjects:
+    - {fileID: -727803449233349181, guid: a911931445726b742a6a857d86632e65, type: 3}
+    - {fileID: 6091191848193522125, guid: a911931445726b742a6a857d86632e65, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: a911931445726b742a6a857d86632e65, type: 3}

@@ -6199,7 +6199,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Welcome to Golf\u0117ja!\nYour goal is to reach the golf hole is as few
+  m_text: "Welcome to Golf\u0117ja!\nYour goal is to reach the golf hole in as few
     hits as possible.\nIf you fly off the map, you'll be returned to your original
     location."
   m_isRightToLeft: 0

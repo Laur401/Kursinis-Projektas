@@ -64,8 +64,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: blockSmaller
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedComponents:
+    - {fileID: 4742473837712756890, guid: e8d57b91122779848bc48e8f71076a60, type: 3}
+    m_RemovedGameObjects:
+    - {fileID: 3930617753327569348, guid: e8d57b91122779848bc48e8f71076a60, type: 3}
+    - {fileID: -7869803274626822167, guid: e8d57b91122779848bc48e8f71076a60, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: e8d57b91122779848bc48e8f71076a60, type: 3}

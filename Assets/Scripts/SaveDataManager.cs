@@ -16,7 +16,7 @@ public class SaveDataManager : MonoBehaviour
     {
         saveFilePath = Path.Combine(Application.persistentDataPath, "save.json");
         Debug.Log(saveFilePath);
-        if (!File.Exists(saveFilePath)) File.Create(saveFilePath);
+        if (!File.Exists(saveFilePath)) File.WriteAllText(saveFilePath, "{}");
         LoadData();
         jsonData.levels ??= new List<LevelData>();
     }
@@ -30,17 +30,17 @@ public class SaveDataManager : MonoBehaviour
     public void LoadData()
     {
         string json = File.ReadAllText(saveFilePath);
-        jsonData = JsonUtility.FromJson<JsonData>(json);
+        jsonData = JsonUtility.FromJson<JsonData>(json) ?? new JsonData();
     }
     
     public void AddLevel(int id, int par, int hitCount)
     {
-        jsonData.levels.Add(new LevelData{levelID = id, par = par, hitCount = hitCount});
+        jsonData?.levels?.Add(new LevelData{levelID = id, par = par, hitCount = hitCount});
     }
 
     public void ModifyLevel(int id, int? par = null, int? hitCount = null)
     {
-        var search = jsonData.levels.FirstOrDefault(x => x.levelID == id);
+        var search = jsonData?.levels?.FirstOrDefault(x => x.levelID == id);
         if (search != null)
         {
             if (par != null)
@@ -52,8 +52,13 @@ public class SaveDataManager : MonoBehaviour
 
     public (int levelID, int par, int hitCount)? ReadLevel(int id)
     {
-        var search = jsonData.levels.FirstOrDefault(x => x.levelID == id);
+        var search = jsonData?.levels?.FirstOrDefault(x => x.levelID == id);
         return search == null ? null : (search.levelID, search.par, search.hitCount);
+    }
+
+    private void OnApplicationQuit()
+    {
+        SaveData();
     }
 }
 

@@ -23,6 +23,7 @@ public class DifficultyManager : MonoBehaviour
     void OnDestroy()
     {
         PlayerPrefs.SetString("difficulty", difficultyLevel.ToString());
+        PlayerPrefs.Save();
     }
     
 }

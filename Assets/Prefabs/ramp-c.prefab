@@ -64,8 +64,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: ramp-c
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedComponents:
+    - {fileID: 4742473837712756890, guid: 2c5d2257b52d5344490fc3e0832336e7, type: 3}
+    m_RemovedGameObjects:
+    - {fileID: -6352167386729658643, guid: 2c5d2257b52d5344490fc3e0832336e7, type: 3}
+    - {fileID: 481605098032603753, guid: 2c5d2257b52d5344490fc3e0832336e7, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 2c5d2257b52d5344490fc3e0832336e7, type: 3}

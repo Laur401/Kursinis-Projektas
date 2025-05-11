@@ -68,8 +68,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: round-corner-a
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedComponents:
+    - {fileID: 4742473837712756890, guid: b6554393e907c284d83e4563a9c087a6, type: 3}
+    m_RemovedGameObjects:
+    - {fileID: -6596806695371475015, guid: b6554393e907c284d83e4563a9c087a6, type: 3}
+    - {fileID: -4898973114323988155, guid: b6554393e907c284d83e4563a9c087a6, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: b6554393e907c284d83e4563a9c087a6, type: 3}

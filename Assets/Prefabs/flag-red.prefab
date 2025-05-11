@@ -68,8 +68,19 @@ PrefabInstance:
       propertyPath: m_Name
       value: flag-red
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    - target: {fileID: 4742473837712756890, guid: be54939cff9c4344481a5f76bc201d3e, type: 3}
+      propertyPath: m_LODs.Array.data[1].renderers.Array.data[0].renderer
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 4742473837712756890, guid: be54939cff9c4344481a5f76bc201d3e, type: 3}
+      propertyPath: m_LODs.Array.data[2].renderers.Array.data[0].renderer
+      value: 
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 4742473837712756890, guid: be54939cff9c4344481a5f76bc201d3e, type: 3}
+    m_RemovedGameObjects:
+    - {fileID: -5074779810542149856, guid: be54939cff9c4344481a5f76bc201d3e, type: 3}
+    - {fileID: -8453300431758608126, guid: be54939cff9c4344481a5f76bc201d3e, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: be54939cff9c4344481a5f76bc201d3e, type: 3}
