@@ -10,6 +10,7 @@ public class PowerupButtonUnlocker : MonoBehaviour, IGameEventMessageTarget
 {
     [SerializeField] private List<Button> UIButtons;
     [SerializeField] private List<PowerupButton> powerups;
+    [SerializeField] private bool powerupLock = false;
 
     private void Start()
     {
@@ -24,6 +25,7 @@ public class PowerupButtonUnlocker : MonoBehaviour, IGameEventMessageTarget
         {
             if (button.IsInteractable()) continue;
             button.onClick?.AddListener(()=> { 
+                if (powerupLock) return;
                 powerups[selection].buttonClicked.Invoke(); 
                 button.interactable = false;
                 button.GetComponentInChildren<TMP_Text>().text = ""; 
@@ -33,6 +35,9 @@ public class PowerupButtonUnlocker : MonoBehaviour, IGameEventMessageTarget
             break;
         }
     }
+
+    public void OnPowerupEnable() => powerupLock = true;
+    public void OnPowerupDisable() => powerupLock = false;
 }
 
 [Serializable]

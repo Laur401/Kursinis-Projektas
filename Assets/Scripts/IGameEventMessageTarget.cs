@@ -11,6 +11,8 @@ public interface IGameEventMessageTarget : IEventSystemHandler
     void OnPowerupCollection() { }
     void OnMousePowerupEnable() { }
     void OnMousePowerupDisable() { }
+    void OnPowerupEnable() { }
+    void OnPowerupDisable() { }
     void OnSaveButtonPress() { }
     void OnNextLevelLoad() { }
 }

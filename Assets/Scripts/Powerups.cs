@@ -22,10 +22,11 @@ public class Powerups : MonoBehaviour, IGameEventMessageTarget
     // Update is called once per frame
     void Update()
     {
-        if (rewindPowerup) {RewindPowerup(); rewindPowerup = false;}
-        if (jumpPowerup) {StartCoroutine(JumpPowerup()); jumpPowerup = false;}
-        if (holeMagnetPowerup) {StartCoroutine(HoleMagnetPowerup()); holeMagnetPowerup = false;}
-        if (teleportPowerup) {StartCoroutine(TeleportPowerup()); teleportPowerup = false;}
+        if (rewindPowerup) {RewindPowerup();
+            SendPowerupLock(); rewindPowerup = false;}
+        if (jumpPowerup) {StartCoroutine(JumpPowerup()); SendPowerupLock(); jumpPowerup = false;}
+        if (holeMagnetPowerup) {StartCoroutine(HoleMagnetPowerup()); SendPowerupLock(); holeMagnetPowerup = false;}
+        if (teleportPowerup) {StartCoroutine(TeleportPowerup()); SendPowerupLock(); teleportPowerup = false;}
     }
 
     private void RewindPowerup()
@@ -34,6 +35,7 @@ public class Powerups : MonoBehaviour, IGameEventMessageTarget
         rb.gameObject.transform.position = lastLocationStack.Pop();
         rb.velocity = Vector3.zero;
         rb.angularVelocity = Vector3.zero;
+        SendPowerupUnlock();
     }
 
     private IEnumerator JumpPowerup()
@@ -41,6 +43,7 @@ public class Powerups : MonoBehaviour, IGameEventMessageTarget
         yield return new WaitUntil(()=>ballHit);
         ballHit = false;
         rb.AddForce(Vector3.up * jumpStrength, ForceMode.Impulse);
+        SendPowerupUnlock();
     }
 
     private IEnumerator HoleMagnetPowerup()
@@ -53,6 +56,7 @@ public class Powerups : MonoBehaviour, IGameEventMessageTarget
             rb.AddForce(direction * magnetStrength, ForceMode.Force);
             yield return null;
         }
+        SendPowerupUnlock();
     }
 
     private IEnumerator TeleportPowerup()
@@ -68,6 +72,7 @@ public class Powerups : MonoBehaviour, IGameEventMessageTarget
         rb.gameObject.transform.position = location.Value;
         ExecuteEvents.Execute<IGameEventMessageTarget>(rb.gameObject, null, 
             (handler, data) => handler.OnMousePowerupDisable());
+        SendPowerupUnlock();
     }
 
     public void OnBallHitInput() => ballHit = true;
@@ -76,6 +81,18 @@ public class Powerups : MonoBehaviour, IGameEventMessageTarget
     private void LateUpdate()
     {
         ballHit = false;
+    }
+
+    private void SendPowerupLock()
+    {
+        ExecuteEvents.Execute<IGameEventMessageTarget>(rb.gameObject, null, 
+            (handler, data) => handler.OnPowerupEnable());
+    }
+
+    private void SendPowerupUnlock()
+    {
+        ExecuteEvents.Execute<IGameEventMessageTarget>(rb.gameObject, null, 
+            (handler, data) => handler.OnPowerupDisable());
     }
 
     public void OnRewindPowerupActivate() => rewindPowerup = true;

@@ -22,15 +22,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 1d3f7cf439f0777428d8117d3f9251bf, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -11.776789
+      value: -12.72
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 1d3f7cf439f0777428d8117d3f9251bf, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.46920353
+      value: -0.1507965
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 1d3f7cf439f0777428d8117d3f9251bf, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -20.6
+      value: -20.615
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 1d3f7cf439f0777428d8117d3f9251bf, type: 3}
       propertyPath: m_LocalRotation.w
@@ -67,6 +67,18 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 1d3f7cf439f0777428d8117d3f9251bf, type: 3}
       propertyPath: m_Name
       value: skew-large-corner
+      objectReference: {fileID: 0}
+    - target: {fileID: 4742473837712756890, guid: 1d3f7cf439f0777428d8117d3f9251bf, type: 3}
+      propertyPath: m_LODs.Array.data[0].screenRelativeHeight
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4742473837712756890, guid: 1d3f7cf439f0777428d8117d3f9251bf, type: 3}
+      propertyPath: m_LODs.Array.data[1].screenRelativeHeight
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4742473837712756890, guid: 1d3f7cf439f0777428d8117d3f9251bf, type: 3}
+      propertyPath: m_LODs.Array.data[2].screenRelativeHeight
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

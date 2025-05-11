@@ -160,8 +160,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -0.00011764087}
-  m_SizeDelta: {x: 0, y: 825}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 1090}
   m_Pivot: {x: 0, y: 1}
 --- !u!1 &11748881
 GameObject:
@@ -990,8 +990,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 8.5, y: -612.8}
-  m_SizeDelta: {x: 630, y: 409.78}
+  m_AnchoredPosition: {x: 8.5, y: -758}
+  m_SizeDelta: {x: 630, y: 670}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &170927055
 MonoBehaviour:
@@ -1015,8 +1015,11 @@ MonoBehaviour:
       m_Calls: []
   m_text: "Powerups:\n\u2022 Magnet - Attracts the ball to the hole!\n\u2022 Jump
     - Makes the ball jump!\n\u2022 Rewind - Brings you back to the previous hit!\n\u2022
-    Teleport - Teleports you wherever you target!\n\nYou will receive your score
-    at the end of the game.\nRemember - the lower a score, the better!\nGood luck!"
+    Teleport - Teleports you wherever you target!\n\nIn the game's Settings, you
+    can select one of three difficulties:\n\u2022 Easy - Every feature is available.\n\u2022
+    Medium - Powerups are disabled.\n\u2022 Rewind - Ball direction pointer is disabled.\n\nYou
+    will receive your score at the end of the game.\nRemember - the lower a score,
+    the better!\nGood luck!"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 936e3d04eeadf8b1aadd44d257a43e97, type: 2}
   m_sharedMaterial: {fileID: 2100000, guid: db5ce257033cb4398a90243c3af68b8b, type: 2}
@@ -2627,7 +2630,7 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 839218252}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0.39030296}
+  m_AnchorMin: {x: 0, y: 0.538532}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 20}
@@ -3636,8 +3639,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 699260331}
   m_HandleRect: {fileID: 699260330}
   m_Direction: 2
-  m_Value: 1.0000004
-  m_Size: 0.60969704
+  m_Value: 1
+  m_Size: 0.46146795
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
